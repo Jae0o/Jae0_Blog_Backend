@@ -1,12 +1,12 @@
-import TestCOde from "@middlewares/index";
+import app from "./app";
 
-console.log(TestCOde);
+const PORT = process.env.PORT || 4000;
 
-// app.listen(PORT, () => {
-//   console.log(`
-//   ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-//   ┃   Server listening on port: ${PORT}    ┃
-//   ┃     http://localhost:${PORT}/api       ┃
-//   ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-//   `);
-// });
+app.listen(PORT, () => {
+  console.log(`
+  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+  ┃   Server listening on port: ${PORT}    ┃
+  ┃     http://localhost:${PORT}/api       ┃
+  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+  `);
+});

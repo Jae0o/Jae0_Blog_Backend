@@ -17,6 +17,10 @@
     "baseUrl": "src/.",
     "paths": {
       "@middlewares/*": ["middlewares/*"],
+      "@constants/*": ["constants/*"],
+      "@services/*": ["services/*"],
+      "@controllers/*": ["controllers/*"],
+      "@utils/*": ["utils/*"],
       "@/*": ["*"]
     }
   },
