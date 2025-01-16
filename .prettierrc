@@ -19,6 +19,13 @@
     "dotenv",
 
     "^@middleware",
+    "^@constants",
+    "^@services",
+    "^@controllers",
+    "^@utils",
+    "^@config",
+    "^@routes",
+    "^@interfaces",
     "^@",
 
     "^[../]",

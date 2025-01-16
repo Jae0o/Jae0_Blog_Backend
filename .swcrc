@@ -23,11 +23,28 @@
     "paths": {
       "@/*": ["./*"],
       "@middlewares/*": ["./middlewares/*"],
+      "@middlewares": ["./middlewares/index"],
+
       "@constants/*": ["./constants/*"],
+      "@constants": ["./constants/index"],
+
       "@services/*": ["./services/*"],
+      "@services": ["./services/index"],
+
       "@controllers/*": ["./controllers/*"],
+      "@controllers": ["./controllers/index"],
+
       "@utils/*": ["./utils/*"],
-      "@config/*": ["./config/*"]
+      "@utils": ["./utils/index"],
+
+      "@config/*": ["./config/*"],
+      "@config": ["./config/index"],
+
+      "@routes/*": ["./routes/*"],
+      "@routes": ["./routes/index"],
+
+      "@interfaces/*": ["./interfaces/*"],
+      "@interfaces": ["./interfaces/index"]
     }
   },
   "module": {
