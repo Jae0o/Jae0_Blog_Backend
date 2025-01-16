@@ -22,7 +22,11 @@
     "baseUrl": "./src",
     "paths": {
       "@/*": ["./*"],
-      "@middlewares/*": ["./middlewares/*"]
+      "@middlewares/*": ["./middlewares/*"],
+      "@constants/*": ["./constants/*"],
+      "@services/*": ["./services/*"],
+      "@controllers/*": ["./controllers/*"],
+      "@utils/*": ["./utils/*"]
     }
   },
   "module": {

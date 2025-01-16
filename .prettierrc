@@ -15,21 +15,15 @@
 
   "plugins": ["@trivago/prettier-plugin-sort-imports"],
   "importOrder": [
-    ".css$",
-    ".Styles",
-    "style",
-    "next",
-    "^react",
-    "^@/lib/components",
-    "^@/lib/container",
-    "^@/lib/api",
-    "^@/lib/assets",
-    "^@/lib/css",
-    "^@/lib/hooks",
-    "^@/lib/utils",
+    "express",
+    "dotenv",
+
+    "^@middleware",
     "^@",
+
     "^[../]",
     "^[./]",
+
     "<THIRD_PARTY_MODULES>"
   ],
   "importOrderSortSpecifiers": true,
