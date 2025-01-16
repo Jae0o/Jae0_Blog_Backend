@@ -1,6 +1,6 @@
-const port = 5000;
+import TestCOde from "@middlewares/index";
 
-console.log(port);
+console.log(TestCOde);
 
 // app.listen(PORT, () => {
 //   console.log(`

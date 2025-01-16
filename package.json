@@ -1,7 +1,6 @@
 {
   "name": "jae0_blog_backend",
   "version": "1.0.0",
-  "main": "server.ts",
   "scripts": {
     "start": "ts-node src/server.ts",
     "dev": "nodemon"
