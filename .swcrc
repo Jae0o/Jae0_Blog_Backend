@@ -26,7 +26,8 @@
       "@constants/*": ["./constants/*"],
       "@services/*": ["./services/*"],
       "@controllers/*": ["./controllers/*"],
-      "@utils/*": ["./utils/*"]
+      "@utils/*": ["./utils/*"],
+      "@config/*": ["./config/*"]
     }
   },
   "module": {
