@@ -1,5 +1,7 @@
 import express from "express";
 
+import { errorMiddleware } from "@middlewares";
+
 import { DEV_LOG } from "@config";
 
 import routes from "@routes";
@@ -15,5 +17,7 @@ routes.forEach(route => {
 
   app.use(`/service/api${prefix}`, route.router);
 });
+
+app.use(errorMiddleware);
 
 export default app;
