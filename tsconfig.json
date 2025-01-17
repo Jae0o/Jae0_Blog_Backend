@@ -16,29 +16,29 @@
 
     "baseUrl": "src/.",
     "paths": {
-      "@middlewares/*": ["middlewares/*"],
       "@middlewares": ["middlewares/index.ts"],
+      "@middlewares/*": ["middlewares/*"],
 
-      "@constants/*": ["constants/*"],
       "@constants": ["constants/index.ts"],
+      "@constants/*": ["constants/*"],
 
-      "@services/*": ["services/*"],
       "@services": ["services/index.ts"],
+      "@services/*": ["services/*"],
 
-      "@controllers/*": ["controllers/*"],
       "@controllers": ["controllers/index.ts"],
+      "@controllers/*": ["controllers/*"],
 
-      "@utils/*": ["utils/*"],
       "@utils": ["utils/index.ts"],
+      "@utils/*": ["utils/*"],
 
-      "@config/*": ["config/*"],
       "@config": ["config/index.ts"],
+      "@config/*": ["config/*"],
 
-      "@routes/*": ["routes/*"],
       "@routes": ["routes/index.ts"],
+      "@routes/*": ["routes/*"],
 
-      "@interfaces/*": ["interfaces/*"],
       "@interfaces": ["interfaces/index.ts"],
+      "@interfaces/*": ["interfaces/*"],
 
       "@/*": ["*"]
     }
