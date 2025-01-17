@@ -12,6 +12,10 @@ const app = express();
 
 app.use(morgan(DEV_LOG || "combined"));
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// ------------- Router -------------
 routes.forEach(route => {
   const prefix = route.path ?? "";
 

@@ -1,12 +1,12 @@
 import { Router } from "express";
 
+import { PostController } from "@controllers";
+
 import { Routes } from "@interfaces";
 
 const route = Router();
 
-route.get("/", (req, res) => {
-  res.send("Hello World");
-});
+route.get("/all", PostController.getAllPosts);
 
 const postRouter: Routes = {
   path: "/post",
