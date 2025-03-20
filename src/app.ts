@@ -1,5 +1,3 @@
-import "tsconfig-paths/register";
-
 import express from "express";
 
 import { errorMiddleware } from "@middlewares";
