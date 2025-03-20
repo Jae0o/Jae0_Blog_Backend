@@ -15,6 +15,7 @@
 
   "plugins": ["@trivago/prettier-plugin-sort-imports"],
   "importOrder": [
+    "^tsconfig",
     "express",
     "dotenv",
 

@@ -1,3 +1,5 @@
+import "tsconfig-paths/register";
+
 import express from "express";
 
 import { errorMiddleware } from "@middlewares";
@@ -25,5 +27,9 @@ routes.forEach(route => {
 });
 
 app.use(errorMiddleware);
+
+app.get("/*", (_req, res) => {
+  res.status(404).send("Not Found");
+});
 
 export default app;
