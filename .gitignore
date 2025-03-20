@@ -1,6 +1,5 @@
 # 프로젝트 설정
 node_modules
-dist
 
 .DS_Store
 

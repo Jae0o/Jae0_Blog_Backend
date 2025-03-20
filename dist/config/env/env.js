@@ -1,0 +1,9 @@
+"use strict";
+var _a;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FIREBASE_ADMIN_USER_ID = exports.FIREBASE_DATABASE_URL = exports.FIREBASE_MEASUREMENT_ID = exports.FIREBASE_APP_ID = exports.FIREBASE_MESSAGING_SENDER_ID = exports.FIREBASE_STORAGE_BUCKET = exports.FIREBASE_PROJECT_ID = exports.FIREBASE_AUTH_DOMAIN = exports.FIREBASE_API_KEY = exports.DEV_LOG = exports.PORT = void 0;
+const dotenv_1 = require("dotenv");
+(0, dotenv_1.config)();
+_a = process.env, exports.PORT = _a.PORT, exports.DEV_LOG = _a.DEV_LOG, 
+// Firebase
+exports.FIREBASE_API_KEY = _a.FIREBASE_API_KEY, exports.FIREBASE_AUTH_DOMAIN = _a.FIREBASE_AUTH_DOMAIN, exports.FIREBASE_PROJECT_ID = _a.FIREBASE_PROJECT_ID, exports.FIREBASE_STORAGE_BUCKET = _a.FIREBASE_STORAGE_BUCKET, exports.FIREBASE_MESSAGING_SENDER_ID = _a.FIREBASE_MESSAGING_SENDER_ID, exports.FIREBASE_APP_ID = _a.FIREBASE_APP_ID, exports.FIREBASE_MEASUREMENT_ID = _a.FIREBASE_MEASUREMENT_ID, exports.FIREBASE_DATABASE_URL = _a.FIREBASE_DATABASE_URL, exports.FIREBASE_ADMIN_USER_ID = _a.FIREBASE_ADMIN_USER_ID;
