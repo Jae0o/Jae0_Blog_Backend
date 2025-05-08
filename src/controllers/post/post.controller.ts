@@ -1,6 +1,10 @@
 import { PostService } from "@services";
 
-import { GetAllPostsHandler, GetPostListHandler } from "./post.type";
+import {
+  GetAllPostsHandler,
+  GetPostHandler,
+  GetPostListHandler,
+} from "./post.type";
 
 const getAllPosts: GetAllPostsHandler = async (req, res, next) => {
   try {
@@ -26,9 +30,22 @@ const getPostList: GetPostListHandler = async (req, res, next) => {
   }
 };
 
+const getPost: GetPostHandler = async (req, res, next) => {
+  try {
+    const { postId } = req.query;
+
+    const result = await PostService.getPost({ postId });
+
+    res.status(200).json({ post: result });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const PostController = {
   getAllPosts,
   getPostList,
+  getPost,
 };
 
 export default PostController;
