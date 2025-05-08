@@ -1,9 +1,14 @@
 import { ErrorRequestHandler } from "express";
 
 const errorMiddleware: ErrorRequestHandler = (error, req, res, next) => {
-  console.log("error", error);
+  try {
+    const status: number = error.status || 500;
+    const message = error.message || "unknown error";
 
-  next();
+    res.status(status).json({ message });
+  } catch (error) {
+    next(error);
+  }
 };
 
 export default errorMiddleware;
