@@ -34,3 +34,20 @@ export type GetPostListHandler = RequestHandler<
   void,
   PostListQuery
 >;
+
+// ------------------------------------ GET POST ------------------------------------
+
+interface PostQuery {
+  postId: string;
+}
+
+interface PostResponse {
+  post: Post;
+}
+
+export type GetPostHandler = RequestHandler<
+  void,
+  PostResponse,
+  void,
+  PostQuery
+>;

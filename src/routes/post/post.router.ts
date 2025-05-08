@@ -8,9 +8,11 @@ const route = Router();
 
 route.get("/all", PostController.getAllPosts);
 route.get("/list", PostController.getPostList);
+route.get("", PostController.getPost);
 
 const postRouter: Routes = {
   path: "/post",
   router: route,
 };
+
 export default postRouter;
