@@ -4,7 +4,7 @@ import { Post } from "@interfaces";
 
 import { collection, getDocs, query, where } from "firebase/firestore";
 
-export const getPostList = async ({ category }: { category: string }) => {
+const getPostList = async ({ category }: { category: string }) => {
   const queryRef = query(
     collection(fireStore, "posts"),
     where("category", "==", category),
@@ -24,3 +24,5 @@ export const getPostList = async ({ category }: { category: string }) => {
 
   return result;
 };
+
+export default getPostList;
