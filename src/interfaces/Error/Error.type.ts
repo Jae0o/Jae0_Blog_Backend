@@ -17,6 +17,7 @@ export enum BlogErrorStatus {
 
   // GetPostList
   GET_POST_LIST_NO_CATEGORY = 202001,
+  GET_POST_LIST_CATEGORY_NOT_INVALID = 202002,
 
   // GetAllPosts
   GET_ALL_POSTS_NO_CURSOR = 203001,

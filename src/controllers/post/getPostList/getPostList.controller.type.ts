@@ -1,9 +1,9 @@
 import { RequestHandler } from "express";
 
-import { Post } from "@interfaces";
+import { Post, PostCategory } from "@interfaces";
 
 export interface GetPostListQuery {
-  category: string;
+  category: PostCategory;
 }
 
 export interface GetPostListResponse {

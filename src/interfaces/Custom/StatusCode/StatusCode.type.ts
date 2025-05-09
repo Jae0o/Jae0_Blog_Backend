@@ -3,7 +3,7 @@ export enum BlogStatusCode {
   CREATED = 201,
 
   BAD_REQUEST = 400,
-  NOT_FULFILLED = 401,
+  NOT_FULFILLED = 400,
   NOT_FOUND = 404,
 
   SERVER_ERROR = 500,

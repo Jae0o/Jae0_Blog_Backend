@@ -12,8 +12,8 @@ const getOptionsValidation: GetOptionsValidation = (req, res, next) => {
     return;
   }
 
-  const OPTIONS_TYPE_LIST = Object.values(OptionsType);
-  if (!OPTIONS_TYPE_LIST.includes(type)) {
+  const optionList = Object.values(OptionsType);
+  if (!optionList.includes(type)) {
     res
       .status(BlogStatusCode.BAD_REQUEST)
       .json({ code: BlogErrorStatus.GET_OPTIONS_TYPE_NOT_INVALID });
