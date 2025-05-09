@@ -8,6 +8,8 @@
  * * @enum 2020XXXX : GetPostList Error
  * * @enum 2030XXXX : GetAllPosts Error
  *
+ * @enum 50XXXX : Option Error
+ * * @enum 5010XX : GetOptions Error
  */
 export enum BlogErrorStatus {
   // GetPost
@@ -18,6 +20,10 @@ export enum BlogErrorStatus {
 
   // GetAllPosts
   GET_ALL_POSTS_NO_CURSOR = 203001,
+
+  // GetOptions
+  GET_OPTIONS_NO_TYPE = 501001,
+  GET_OPTIONS_TYPE_NOT_INVALID = 501002,
 }
 
 export interface BlogError {
