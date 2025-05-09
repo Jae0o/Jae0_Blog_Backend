@@ -10,3 +10,11 @@ export interface Post {
   thumbnail: string;
   miniThumbnail: string;
 }
+
+export enum PostCategory {
+  BLOG = "BLOG",
+  YAP = "YAP",
+  MASILGASIL = "MASILGASIL",
+  DIARY = "DIARY",
+  FRONTEND = "FRONTEND",
+}
