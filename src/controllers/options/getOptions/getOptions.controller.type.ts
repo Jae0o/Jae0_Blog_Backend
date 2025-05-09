@@ -2,13 +2,17 @@ import { RequestHandler } from "express";
 
 import { OptionsType } from "@interfaces";
 
-interface GetOptionParams {
+export interface GetOptionsQuery {
   type: OptionsType;
 }
 
-type GetOptionsResponse = string[];
+export interface GetOptionsResponse {
+  options: string[];
+}
 
 export type GetOptionsHandler = RequestHandler<
-  GetOptionParams,
-  GetOptionsResponse
+  void,
+  GetOptionsResponse,
+  void,
+  GetOptionsQuery
 >;
