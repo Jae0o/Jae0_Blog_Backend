@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getPostList = void 0;
 const _config_1 = require("../../../config/index.js");
 const firestore_1 = require("firebase/firestore");
 const getPostList = async ({ category }) => {
@@ -15,4 +14,4 @@ const getPostList = async ({ category }) => {
     });
     return result;
 };
-exports.getPostList = getPostList;
+exports.default = getPostList;
