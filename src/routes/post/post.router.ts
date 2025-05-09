@@ -4,11 +4,13 @@ import { PostController } from "@controllers";
 
 import { Routes } from "@interfaces";
 
+import { PostValidation } from "@/validations";
+
 const route = Router();
 
-route.get("/all", PostController.getAllPosts);
-route.get("/list", PostController.getPostList);
-route.get("", PostController.getPost);
+route.get("", PostValidation.getPost, PostController.getPost);
+route.get("/list", PostValidation.getPostList, PostController.getPostList);
+route.get("/all", PostValidation.getAllPosts, PostController.getAllPosts);
 
 const postRouter: Routes = {
   path: "/post",
