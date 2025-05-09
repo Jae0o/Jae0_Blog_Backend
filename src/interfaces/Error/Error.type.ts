@@ -2,13 +2,18 @@
  * @description Error Rules
  *
  * @enum 10XXXX : Common Error
- * @enum 20XXXX : Post Error
  *
+ * @enum 20XXXX : Post Error
+ * * @enum 2010XX : GetPost Error
+ * * @enum 2020XXXX : GetPostList Error
  *
  */
 export enum BlogErrorStatus {
-  // GET POST
-  GET_POST_NO_POST_ID = 203001,
+  // GetPost
+  GET_POST_NO_POST_ID = 201001,
+
+  // GetPostList
+  GET_POST_LIST_NO_CATEGORY = 203002,
 }
 
 export interface BlogError {
