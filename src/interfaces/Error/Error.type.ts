@@ -6,6 +6,7 @@
  * @enum 20XXXX : Post Error
  * * @enum 2010XX : GetPost Error
  * * @enum 2020XXXX : GetPostList Error
+ * * @enum 2030XXXX : GetAllPosts Error
  *
  */
 export enum BlogErrorStatus {
@@ -13,7 +14,10 @@ export enum BlogErrorStatus {
   GET_POST_NO_POST_ID = 201001,
 
   // GetPostList
-  GET_POST_LIST_NO_CATEGORY = 203002,
+  GET_POST_LIST_NO_CATEGORY = 202001,
+
+  // GetAllPosts
+  GET_ALL_POSTS_NO_CURSOR = 203001,
 }
 
 export interface BlogError {
