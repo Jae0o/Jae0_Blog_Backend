@@ -3,7 +3,6 @@ import { BlogErrorStatus, BlogStatusCode } from "@interfaces";
 import { GetPostValidation } from "./getPost.validation.type";
 
 const getPostValidation: GetPostValidation = (req, res, next) => {
-  // 특정 req 내부 body 혹은 query 값 검증
   try {
     const { postId } = req.query;
 
