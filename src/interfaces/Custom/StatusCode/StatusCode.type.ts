@@ -4,4 +4,6 @@ export enum BlogStatusCode {
 
   NOT_FULFILLED = 401,
   NOT_FOUND = 404,
+
+  SERVER_ERROR = 500,
 }
