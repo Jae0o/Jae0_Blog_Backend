@@ -1,1 +1,4 @@
-export type OptionsType = "tag" | "category";
+export enum OptionsType {
+  CATEGORY = "category",
+  TAG = "tag",
+}
