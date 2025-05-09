@@ -1,5 +1,3 @@
-import e from "express";
-
 import { BlogErrorStatus, BlogStatusCode } from "@interfaces";
 
 import { GetAllPostsValidation } from "./getAllPosts.validation.type";
