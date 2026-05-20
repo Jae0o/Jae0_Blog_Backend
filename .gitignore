@@ -1,9 +1,0 @@
-# 프로젝트 설정
-node_modules
-
-.DS_Store
-
-
-# 환경 변수
-.env
-.vercel
