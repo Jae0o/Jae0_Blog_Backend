@@ -1,3 +1,71 @@
+<!-- BEGIN inject-claude-rule: lean-coding-rule -->
+# Lean Coding Rules
+
+Behavioral guidelines to reduce common LLM coding mistakes.
+
+**Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks, use judgment.
+
+## 1. Think Before Coding
+
+**Don't assume. Don't hide confusion. Surface tradeoffs.**
+
+Before implementing:
+- State your assumptions explicitly. If uncertain, ask.
+- If multiple interpretations exist, present them - don't pick silently.
+- If a simpler approach exists, say so. Push back when warranted.
+- If something is unclear, stop. Name what's confusing. Ask.
+
+## 2. Simplicity First
+
+**Minimum code that solves the problem. Nothing speculative.**
+
+- No features beyond what was asked.
+- No abstractions for single-use code.
+- No "flexibility" or "configurability" that wasn't requested.
+- No error handling for impossible scenarios.
+- If you write 200 lines and it could be 50, rewrite it.
+
+Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
+
+## 3. Surgical Changes
+
+**Touch only what you must. Clean up only your own mess.**
+
+When editing existing code:
+- Don't "improve" adjacent code, comments, or formatting.
+- Don't refactor things that aren't broken.
+- Match existing style, even if you'd do it differently.
+- If you notice unrelated dead code, mention it - don't delete it.
+
+When your changes create orphans:
+- Remove imports/variables/functions that YOUR changes made unused.
+- Don't remove pre-existing dead code unless asked.
+
+The test: Every changed line should trace directly to the user's request.
+
+## 4. Goal-Driven Execution
+
+**Define success criteria. Loop until verified.**
+
+Transform tasks into verifiable goals:
+- "Add validation" → "Write tests for invalid inputs, then make them pass"
+- "Fix the bug" → "Write a test that reproduces it, then make it pass"
+- "Refactor X" → "Ensure tests pass before and after"
+
+For multi-step tasks, state a brief plan:
+```
+1. [Step] → verify: [check]
+2. [Step] → verify: [check]
+3. [Step] → verify: [check]
+```
+
+Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
+
+---
+
+**These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
+<!-- END inject-claude-rule: lean-coding-rule -->
+
 # Jae0 Blog — Backend (jae0.dev)
 
 Backend API for the personal tech blog **jae0.dev**. After the design was finalized, this is a **full redesign from 0.0.0** (working branch: `dev`).
@@ -23,6 +91,26 @@ Key documents:
 | `be/firestore-rules.md` / `firestore-indexes.md` | Security rules / index specs |
 | `be/guide-m4-m6.md` | 🔰 Beginner explainer for M4~M6 (concepts + decided values) |
 | `verification/mN-verification.md` | ★ Per-milestone verification criteria (read the rule below) |
+
+A **granular, per-task breakdown** of each milestone (one file per step, with its own "검증" gate) is mirrored locally at `.claude/docs/plan/MN-*/` (gitignored). Work through `.claude/docs/plan/MN-*/README.md` → numbered task files in order. Use these for execution; use the sibling `project-init-plan/` for the authoritative spec.
+
+---
+
+## Commands
+
+> ⚠️ Not scaffolded yet — there is **no `package.json` or `src/`** on `dev`. These scripts are created in **M0-01** (`.claude/docs/plan/M0-bootstrap/M0-01-project-init.md`). Until then, no command runs.
+
+Once M0-01 lands (pnpm + tsx + Vitest):
+
+```bash
+pnpm dev      # tsx watch src/server.ts — local server, auto-connects to Firebase Emulator
+pnpm build    # tsc
+pnpm test     # vitest (all tests)
+
+pnpm test <path>                    # run a single test file
+pnpm test -t "<name>"               # run tests matching a name
+firebase emulators:start            # Firestore/Auth/Storage emulators (or use pnpm dev)
+```
 
 ---
 
