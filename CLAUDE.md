@@ -87,7 +87,8 @@ Key documents:
 |---|---|
 | `be/implementation-plan.md` | ★ Milestones M0~M9 + DoD (source of truth for work order) |
 | `be/domain-model.md` | Firestore schema (13 collections) |
-| `be/api-spec.md` | REST endpoints + middleware + folder structure |
+| `be/api-spec.md` | REST endpoints + middleware |
+| `be/folder-structure.md` | ★ Repo root + Vercel deploy mapping + src layer structure (authoritative) |
 | `be/firestore-rules.md` / `firestore-indexes.md` | Security rules / index specs |
 | `be/guide-m4-m6.md` | 🔰 Beginner explainer for M4~M6 (concepts + decided values) |
 | `verification/mN-verification.md` | ★ Per-milestone verification criteria (read the rule below) |
@@ -106,6 +107,8 @@ Once M0-01 lands (pnpm + tsx + Vitest):
 pnpm dev      # tsx watch src/server.ts — local server, auto-connects to Firebase Emulator
 pnpm build    # tsc
 pnpm test     # vitest (all tests)
+pnpm lint     # eslint .            (pnpm lint:fix to autofix)
+pnpm format   # prettier --write .  (auto-sorts imports via @trivago plugin)
 
 pnpm test <path>                    # run a single test file
 pnpm test -t "<name>"               # run tests matching a name
@@ -151,18 +154,31 @@ Each milestone's DoD is in `be/implementation-plan.md`. **Currently: starting fr
 
 ## Server folder structure (target)
 
+> Authoritative spec: `project-init-plan/be/folder-structure.md` (repo root + Vercel deploy mapping + full src tree).
+> Rule (auto-loaded): `.claude/rules/folder-structure.md`. Full spec: `project-init-plan/be/folder-structure.md`.
+> Convention: barrels + co-located `.type.ts` + a `repositories/` layer. **Every domain layer** (routes/controllers/services/repositories/validations/interfaces) uses the SAME nesting `{domain}/{?sub-domain}/{name}/{name}.{suffix}.ts` with a barrel `index.ts` at every level (suffix: router/controller/service/repository/validation/type). Imports are bare via `baseUrl: src` (`import { PostService } from "services"`).
+> Deploy (per `.claude/docs/reference/deployment.md`, NOT main's dist approach): `vercel.json` `rewrites → /api`; `api/index.ts` = Vercel entry (`export default app`); `src/app.ts` = Express app (no listen); `src/server.ts` = local listen. No `dist` commit.
+
 ```
+api/index.ts      # Vercel entry: import app from "../src/app"; export default app
 src/
-  routes/        # HTTP (thin). includes admin/ subtree
-  services/      # business logic + cascade + transaction
-  repositories/  # Firestore access (other layers touch the DB only through here)
-  middleware/    # requireAuth, requireAdmin, rateLimit, logger, errorHandler, requestId
-  lib/           # firebase (admin init), slugify, tokenize, readingTime, ipHash, validators (Zod)
-  types/         # entities.ts, api.ts
-  server.ts
-tests/           # unit, integration, rules
-firestore/       # firestore.rules, firestore.indexes.json
+  app.ts          # Express app (mounts /api, middleware/routes) — NO app.listen
+  server.ts       # local listen only (import app from "./app")
+  config/         # env + firebase-admin init (singleton) + emulator
+  routes/         # routers (index = Routes[]) + admin/ subtree
+  controllers/    # HTTP handlers (thin). feature/action nesting + .type.ts
+  services/       # business logic + cascade + transaction
+  repositories/   # ★ Firestore access ONLY — other layers touch the DB only through here
+  validations/    # Zod request schemas
+  middlewares/    # requireAuth, requireAdmin, rateLimit, logger, error, requestId
+  interfaces/     # shared types (entities, api)
+  utils/          # tokenize, readingTime, ipHash (slug = doc ID, so no slugify)
+  constants/
+tests/            # unit, integration, rules (Vitest)
+firestore/        # firestore.rules, firestore.indexes.json
+scripts/seed.ts   # seed (6 categories + admin + samples)
 ```
+Dependency direction (one-way): `routes → controllers → services → repositories → Firestore (via config)`.
 
 ---
 
