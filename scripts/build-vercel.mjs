@@ -1,4 +1,4 @@
-import { mkdirSync } from 'node:fs';
+import { mkdirSync, writeFileSync } from 'node:fs';
 
 import { build } from 'esbuild';
 
@@ -15,5 +15,7 @@ await build({
   external: ['express', 'zod', 'firebase-admin', 'firebase-admin/*'],
 });
 
-// Other 프리셋의 정적 출력 디렉터리(빌드 후 존재 필요). 비어 있어 노출되는 소스 없음.
+// Other 프리셋의 정적 출력 디렉터리. Vercel은 '비어 있으면' 거부하므로 placeholder 1개를 둔다.
+// index.html이 아니므로 '/'는 정적 서빙되지 않고 rewrites로 /api 함수가 처리한다.
 mkdirSync('public', { recursive: true });
+writeFileSync('public/keep.txt', 'jae0 blog backend API — see /api/health\n');
