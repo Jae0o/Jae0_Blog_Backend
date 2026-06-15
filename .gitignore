@@ -15,3 +15,10 @@ dist
 # Firebase emulator
 *-debug.log
 .firebase
+
+# Vercel
+.vercel
+# 배포 시 esbuild가 생성 (api/index.ts가 import)
+api/_bundle.cjs
+# build-vercel.mjs가 생성하는 정적 출력 디렉터리(빈 폴더)
+public
