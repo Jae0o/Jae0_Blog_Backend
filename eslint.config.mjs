@@ -5,7 +5,7 @@ import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
   // 무시 경로
-  { ignores: ['dist', 'node_modules', 'coverage', '.claude'] },
+  { ignores: ['dist', 'node_modules', 'coverage', '.claude', 'api/_bundle.cjs', 'public'] },
 
   // 베이스
   js.configs.recommended,
