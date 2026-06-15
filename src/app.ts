@@ -1,6 +1,7 @@
 import express from 'express';
 
-import { corsMiddleware, errorHandler, logger, requestId } from 'middlewares';
+import { corsMiddleware, errorHandler, logger, notFound, requestId } from 'middlewares';
+import { routes } from 'routes';
 
 // Express 앱. listen 호출 X — Vercel은 함수로 import한다(로컬 listen은 server.ts).
 const app = express();
@@ -11,7 +12,10 @@ app.use(logger);
 app.use(corsMiddleware);
 app.use(express.json({ limit: '1mb' }));
 
-// 라우트는 M0-08+ 에서 errorHandler 앞에 마운트한다.
+// 도메인 라우트 — `/api` prefix로 마운트
+routes.forEach(({ path, router }) => app.use(`/api${path}`, router));
+
+app.use(notFound);
 app.use(errorHandler);
 
 export default app;
