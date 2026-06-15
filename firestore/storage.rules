@@ -1,0 +1,10 @@
+rules_version = '2';
+
+// 기본 deny 골격 (M0-07). Storage 에뮬레이터 기동에 필요. 실제 규칙은 M8(미디어)에서 추가한다.
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
