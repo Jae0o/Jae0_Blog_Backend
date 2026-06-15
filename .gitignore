@@ -7,3 +7,11 @@
 # Node
 node_modules
 dist
+
+# Env
+.env*
+!.env.example
+
+# Firebase emulator
+*-debug.log
+.firebase
