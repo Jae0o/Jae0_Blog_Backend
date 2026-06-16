@@ -1,3 +1,3 @@
 export * from './asyncHandler';
-export * from './ipHash';
+export * from './ip';
 export * from './pagination';

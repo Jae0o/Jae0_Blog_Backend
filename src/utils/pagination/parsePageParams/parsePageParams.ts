@@ -1,33 +1,14 @@
 import { z } from 'zod';
 
+import { decodeCursor } from '../decodeCursor';
+
 /**
- * cursor 기반 페이지네이션 유틸.
+ * 쿼리 파라미터 파싱.
  * 규칙: .claude/docs/reference/conventions.md (pageSize default 20 / max 50, startAfter 기반)
- *
- * cursor = Firestore startAfter에 넣을 정렬 필드값 배열을 base64url(JSON)로 직렬화한 문자열.
- * (firebase-admin 타입에 의존하지 않도록 snapshot이 아닌 필드값 배열을 받는다.)
  */
 
 const DEFAULT_PAGE_SIZE = 20;
 const MAX_PAGE_SIZE = 50;
-
-/** 정렬 필드값 배열 → base64url(JSON) 문자열. */
-export function encodeCursor(fields: unknown[]): string {
-  return Buffer.from(JSON.stringify(fields)).toString('base64url');
-}
-
-/** base64url(JSON) 문자열 → 필드값 배열. 디코딩 실패/배열 아님이면 throw. */
-export function decodeCursor(cursor: string): unknown[] {
-  let parsed: unknown;
-  try {
-    parsed = JSON.parse(Buffer.from(cursor, 'base64url').toString('utf8'));
-  } catch {
-    throw new Error('cursor를 디코딩할 수 없습니다.');
-  }
-  if (!Array.isArray(parsed)) throw new Error('cursor 형식이 올바르지 않습니다.');
-
-  return parsed;
-}
 
 const pageParamsSchema = z.object({
   // pageSize는 검증 실패(throw)가 아니라 조용한 보정: 누락/0/음수/NaN → default, 초과 → max로 클램프.
