@@ -146,9 +146,9 @@ firebase emulators:start            # Firestore/Auth/Storage emulators (or use p
 ## Milestone order
 
 ```
-M0 bootstrap → M1 public read → M2 view tracking → M3 auth + /me
+M0 bootstrap → M1 public read → M1.1 first prod deploy (early) → M2 view tracking → M3 auth + /me
 → M4 Admin CRUD + cascade → M5 bulk + autosave → M6 taxonomy + search
-→ M7 logs + analytics + redirects → M8 media → M9 deploy
+→ M7 logs + analytics + redirects → M8 media → M9 hardening + domain
 ```
 Each milestone's DoD is in `be/implementation-plan.md`. **Currently: starting from M0.**
 
