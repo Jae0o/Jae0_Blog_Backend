@@ -41,6 +41,7 @@ export interface Category extends BaseEntity {
   tilCount: number;
   metaTitle: string | null;
   metaDescription: string | null;
+  deletedAt: Timestamp | null;
 }
 
 /** tags/{tagId} */
@@ -105,4 +106,26 @@ export interface Til extends BaseEntity {
   deletedAt: Timestamp | null;
   viewCount: number;
   metadata: Record<string, unknown> | null;
+}
+
+/** siteConfig/'default' — 사이트 전역 설정 */
+export interface SiteConfig {
+  siteName: string;
+  siteDescription: string;
+  siteUrl: string;
+  socialLinks: {
+    github: string | null;
+    instagram: string | null;
+    twitter: string | null;
+    mail: string | null;
+    rss: string | null;
+  };
+  authorBio: string | null;
+  authorAvatar: string | null;
+  defaultOgImage: string | null;
+  defaultMetaDescription: string | null;
+  footerText: string | null;
+  footerLinks: { label: string; url: string }[];
+  customAnalyticsEnabled: boolean; // admin 전용 — 공개 응답에서 제외(M1-06)
+  updatedAt: Timestamp;
 }
