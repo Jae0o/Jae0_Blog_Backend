@@ -2,6 +2,7 @@ import type { ErrorRequestHandler } from 'express';
 import { ZodError } from 'zod';
 
 import type { ErrorCode } from 'interfaces';
+import { AppError } from 'utils';
 
 /** 표준 에러 envelope 전송 헬퍼. */
 function send(
@@ -20,6 +21,11 @@ function send(
  */
 export const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
   if (res.headersSent) return next(err);
+
+  // service/controller가 throw한 도메인 HTTP 에러
+  if (err instanceof AppError) {
+    return send(res, err.status, err.code, err.message, err.details);
+  }
 
   // zodValidate가 forward한 검증 실패
   if (err instanceof ZodError) {
