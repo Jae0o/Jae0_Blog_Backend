@@ -34,9 +34,26 @@ globs:
 | validations | `validation` | `.validation.type.ts` |
 | interfaces | `type` | (자체가 타입) |
 
-## 인프라 레이어 — concern 기준 (도메인 nesting 아님)
+## utils — nested + 콜로케이트 테스트 (함수 1개 = 파일 1개)
 
-`config · middlewares · utils · constants`. 예: `middlewares/{Name}Middleware/{name}.middleware.ts`, `config/firebase/firebase.ts`.
+`utils`는 도메인 레이어처럼 nested + 전 레벨 barrel을 쓰되, **함수 1개당 파일 1개 + 테스트 콜로케이트**:
+
+```
+utils/{domain}/{name}/
+  {name}.ts          # 함수 1개 (그에 종속된 private 헬퍼·스키마·타입은 동거 가능)
+  {name}.test.ts     # ★ 콜로케이트 단위 테스트 (tests/ 아님)
+  index.ts           # export * from './{name}'
++ utils/{domain}/index.ts  (단위 재export) → utils/index.ts (도메인 재export)
+```
+
+- 한 파일에 **여러 공개 util을 모으지 않는다**. (예: `pagination/encodeCursor/encodeCursor.ts`, `ip/ipHash/ipHash.ts`)
+- 같은 도메인 형제 util은 상대경로로(`import { decodeCursor } from '../decodeCursor'`) — 루트 barrel 순환 회피.
+- barrel은 **named re-export**(도메인 객체 집약 아님) → 소비: `import { encodeCursor } from 'utils'`.
+- 콜로케이트 테스트 인식: `vitest.config.ts` `include`에 `src/**/*.test.ts` 포함.
+
+## 그 외 인프라 레이어 — concern 기준 (도메인 nesting 아님)
+
+`config · middlewares · constants`. 예: `middlewares/{Name}Middleware/{name}.middleware.ts`, `config/firebase/firebase.ts`.
 
 ## 의존성 방향 (단방향)
 
