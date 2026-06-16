@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [tsconfigPaths()],
   test: {
     environment: 'node',
-    include: ['tests/**/*.test.ts'],
+    include: ['tests/**/*.test.ts', 'src/**/*.test.ts'],
     // app/config 로드 시 config/env Zod 검증이 돌므로 emulator용 로컬값 주입(.env.development와 동일, 비밀 아님).
     env: {
       NODE_ENV: 'test',
