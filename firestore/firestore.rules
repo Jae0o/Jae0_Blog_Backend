@@ -1,10 +1,52 @@
 rules_version = '2';
 
-// 기본 deny 골격 (M0-07). 컬렉션별 실제 규칙은 M1+ 에서 추가한다.
+// 공개 read 규칙 (M1-08). users·media·views·logs 는 각 마일스톤(M2/M3/M7/M8)에서 추가 — 그 전엔 기본 deny.
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if false;
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    function isAdmin() {
+      return isSignedIn() &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+    function notDeleted(r) {
+      return r.data.deletedAt == null;
+    }
+    function isPublic(r) {
+      return r.data.visibility == 'public'; // tils, categories
+    }
+    function isPublicStatus(r) {
+      return r.data.status == 'public'; // posts
+    }
+
+    match /posts/{id} {
+      allow read: if (isPublicStatus(resource) && notDeleted(resource)) || isAdmin();
+      allow write: if isAdmin();
+    }
+    match /tils/{id} {
+      allow read: if (isPublic(resource) && notDeleted(resource)) || isAdmin();
+      allow write: if isAdmin();
+    }
+    match /categories/{id} {
+      allow read: if (isPublic(resource) && notDeleted(resource)) || isAdmin();
+      allow write: if isAdmin();
+    }
+    match /tags/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /siteConfig/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /redirects/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /rateLimits/{id} {
+      allow read: if isAdmin();
+      allow write: if false; // write 는 Admin SDK 만 (rules 우회)
     }
   }
 }
