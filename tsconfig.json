@@ -9,5 +9,5 @@
     "outDir": "dist",
     "baseUrl": "src"
   },
-  "include": ["src", "tests", "api"]
+  "include": ["src", "tests", "api", "scripts"]
 }
