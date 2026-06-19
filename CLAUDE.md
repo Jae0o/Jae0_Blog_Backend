@@ -106,13 +106,13 @@ Once M0-01 lands (pnpm + tsx + Vitest):
 ```bash
 pnpm dev      # tsx watch src/server.ts — local server, auto-connects to Firebase Emulator
 pnpm build    # tsc
-pnpm test     # vitest (all tests)
+pnpm test     # firebase emulators:exec → vitest run (자동 에뮬레이터 부팅 + 전체 1회 실행)
 pnpm lint     # eslint .            (pnpm lint:fix to autofix)
 pnpm format   # prettier --write .  (auto-sorts imports via @trivago plugin)
 
-pnpm test <path>                    # run a single test file
-pnpm test -t "<name>"               # run tests matching a name
-firebase emulators:start            # Firestore/Auth/Storage emulators (or use pnpm dev)
+pnpm emulators                      # Firestore 에뮬레이터 기동 (watch 워크플로우용)
+pnpm test:watch <path>              # vitest watch — 단일 파일/개발용 (먼저 pnpm emulators)
+pnpm test:watch -t "<name>"         # 이름 매칭 watch (먼저 pnpm emulators)
 ```
 
 ---
