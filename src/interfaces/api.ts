@@ -9,10 +9,10 @@ export interface ApiResponse<T> {
   meta?: Record<string, unknown>;
 }
 
-/** 리스트 응답: cursor 기반 페이지네이션 (nextCursor null = 마지막 페이지) */
+/** 리스트 응답: cursor 기반 페이지네이션 (nextCursor null = 마지막 페이지). total은 ?includeTotal=true일 때만. */
 export interface ApiListResponse<T> {
   data: T[];
-  meta: { nextCursor: string | null };
+  meta: { nextCursor: string | null; total?: number };
 }
 
 /** 에러 코드 카탈로그 (conventions.md) */
