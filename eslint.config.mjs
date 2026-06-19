@@ -18,10 +18,9 @@ export default tseslint.config(
       parserOptions: { sourceType: 'module' },
     },
     rules: {
-      '@typescript-eslint/no-unused-vars': [
-        'warn',
-        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
-      ],
+      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
+      // Express 타입 증강(declare global { namespace Express })을 허용 — ambient namespace.
+      '@typescript-eslint/no-namespace': ['error', { allowDeclarations: true }],
     },
   },
 
