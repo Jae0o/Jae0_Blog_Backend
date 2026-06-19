@@ -45,6 +45,9 @@ importers:
       eslint-config-prettier:
         specifier: ^10.0.1
         version: 10.1.8(eslint@9.39.4)
+      firebase:
+        specifier: ^12
+        version: 12.14.0
       globals:
         specifier: ^15.14.0
         version: 15.15.0
