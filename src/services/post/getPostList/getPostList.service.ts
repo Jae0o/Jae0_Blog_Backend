@@ -25,3 +25,25 @@ export async function getPostList(params: GetPostListParams): Promise<Post[]> {
 
   return PostRepository.listPublic({ categoryId, tag, sort, pageSize, cursor });
 }
+
+export interface CountPostListParams {
+  categorySlug?: string;
+  tag?: string;
+}
+
+/**
+ * 공개 글 전체 개수 (목록과 동일 필터). ?includeTotal=true에서 사용.
+ * categorySlug 미존재 → 0 (목록이 빈 배열인 것과 일관).
+ */
+export async function countPostList(params: CountPostListParams): Promise<number> {
+  const { categorySlug, tag } = params;
+
+  let categoryId: string | undefined;
+  if (categorySlug) {
+    const category = await CategoryRepository.getBySlug(categorySlug);
+    if (!category) return 0;
+    categoryId = category.id;
+  }
+
+  return PostRepository.countPublic({ categoryId, tag });
+}
