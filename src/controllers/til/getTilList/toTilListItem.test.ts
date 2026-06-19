@@ -31,13 +31,21 @@ function fakeTil(overrides: Partial<Til> = {}): Til {
   };
 }
 
-// M1-05 검증: 카드 DTO는 code 미리보기를 포함하고, publishedAt은 createdAt으로 매핑하며 본문/내부 필드는 제외한다.
-describe('toTilListItem (M1-05)', () => {
+// M1 보강(api-spec TilListItem): 카드 DTO는 body·bodyPreview를 포함하고, publishedAt은 createdAt으로
+// 매핑하며 bodyText·keywords·authorId 등 내부 필드는 제외한다.
+describe('toTilListItem (M1)', () => {
   it('publishedAt을 createdAt으로 매핑하고 timestamp를 ISO로 직렬화', () => {
     const item = toTilListItem(fakeTil());
 
     expect(item.publishedAt).toBe(new Date(1_699_000_000_000).toISOString());
     expect(item.updatedAt).toBe(new Date(1_700_500_000_000).toISOString());
+  });
+
+  it('body와 bodyPreview를 포함 (카드 본문 렌더용)', () => {
+    const item = toTilListItem(fakeTil());
+
+    expect(item.body).toEqual({ type: 'doc' });
+    expect(item.bodyPreview).toBe('본문 텍스트');
   });
 
   it('code 미리보기 필드를 포함', () => {
@@ -47,10 +55,9 @@ describe('toTilListItem (M1-05)', () => {
     expect(item.codeLanguage).toBe('ts');
   });
 
-  it('본문/내부 전용 필드는 미포함', () => {
+  it('내부 전용 필드는 미포함', () => {
     const item = toTilListItem(fakeTil());
 
-    expect('body' in item).toBe(false);
     expect('bodyText' in item).toBe(false);
     expect('keywords' in item).toBe(false);
     expect('authorId' in item).toBe(false);

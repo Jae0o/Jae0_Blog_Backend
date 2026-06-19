@@ -40,12 +40,15 @@ describe('toTilDetail (M1-05)', () => {
     expect(detail.code).toBe('const a = 1;');
     expect(detail.createdAt).toBe(new Date(1_699_000_000_000).toISOString());
     expect(detail.updatedAt).toBe(new Date(1_700_500_000_000).toISOString());
-    expect(detail.deletedAt).toBeNull();
   });
 
-  it('deletedAt이 Timestamp면 ISO 문자열로 직렬화', () => {
-    const detail = toTilDetail(fakeTil({ deletedAt: Timestamp.fromMillis(1_701_000_000_000) }));
+  it('내부 필드(authorId·bodyText·keywords·metadata·deletedAt)는 미포함 (PostDetail과 동일 정책)', () => {
+    const detail = toTilDetail(fakeTil());
 
-    expect(detail.deletedAt).toBe(new Date(1_701_000_000_000).toISOString());
+    expect('authorId' in detail).toBe(false);
+    expect('bodyText' in detail).toBe(false);
+    expect('keywords' in detail).toBe(false);
+    expect('metadata' in detail).toBe(false);
+    expect('deletedAt' in detail).toBe(false);
   });
 });
