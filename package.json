@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "tsx watch --env-file=.env.development src/server.ts",
     "seed": "tsx --env-file=.env.development scripts/seed.ts",
+    "seed:prod": "tsx --env-file=.env.production.local scripts/seed.ts",
     "build": "tsc",
     "test": "firebase emulators:exec --only firestore --project jae0-blog-v2 \"vitest run\"",
     "test:watch": "vitest",
