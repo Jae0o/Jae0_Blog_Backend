@@ -1,6 +1,7 @@
 import type { Router } from 'express';
 
 import { categoryRouter } from './category';
+import { docsRouter } from './docs';
 import { healthRouter } from './health';
 import { postRouter } from './post';
 import { siteConfigRouter } from './siteConfig';
@@ -20,4 +21,5 @@ export const routes: Route[] = [
   { path: '/categories', router: categoryRouter },
   { path: '/tags', router: tagRouter },
   { path: '/site-config', router: siteConfigRouter },
+  { path: '/docs', router: docsRouter },
 ];
