@@ -108,6 +108,9 @@ export interface Til extends BaseEntity {
   metadata: Record<string, unknown> | null;
 }
 
+/** views 트래킹 대상 타입 (M2) */
+export type ViewTargetType = 'post' | 'til';
+
 /** siteConfig/'default' — 사이트 전역 설정 */
 export interface SiteConfig {
   siteName: string;
