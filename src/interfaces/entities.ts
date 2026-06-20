@@ -111,6 +111,15 @@ export interface Til extends BaseEntity {
 /** views 트래킹 대상 타입 (M2) */
 export type ViewTargetType = 'post' | 'til';
 
+/** views/{targetType_targetId_date} — 일자별 조회 집계 (M2) */
+export interface View {
+  targetType: ViewTargetType;
+  targetId: string;
+  date: string; // YYYY-MM-DD (UTC)
+  count: number;
+  ipHashes: string[];
+}
+
 /** siteConfig/'default' — 사이트 전역 설정 */
 export interface SiteConfig {
   siteName: string;
