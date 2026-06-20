@@ -3,7 +3,7 @@ import request from 'supertest';
 import { describe, expect, it } from 'vitest';
 
 // 현재 구현된 공개 read 엔드포인트 8개가 OpenAPI 문서에 모두 노출되는지 검증.
-// app은 firebase-admin을 init하지 않으므로 emulator 없이 동작한다.
+// /api/docs도 rateLimit(→Firestore)을 거치므로, 첫 요청은 firebase-admin 콜드스타트를 부담한다 → 타임아웃 여유.
 const EXPECTED_PATHS = [
   '/health',
   '/posts',
